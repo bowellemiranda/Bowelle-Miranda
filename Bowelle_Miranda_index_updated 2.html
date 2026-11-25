@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Discover Bowelle Miranda handmade hair accessories, bows and bags.">
+<title>Bowelle Miranda | Handmade Accessories</title>
+<style>
+:root{--cream:#faf8f4;--sand:#eee5d9;--brown:#393128;--gold:#a58b6b;--muted:#817568;--white:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--brown);font-family:Arial,sans-serif}
+header{padding:20px 6%;display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--cream);position:sticky;top:0;z-index:5;border-bottom:1px solid #e8dfd4}
+.logo{font-family:Georgia,serif;letter-spacing:5px;font-size:22px;text-align:center}.logo span{display:block;font:12px Arial,sans-serif;letter-spacing:7px;margin-top:7px}
+nav{display:flex;align-items:center;gap:22px}nav a{color:var(--brown);text-decoration:none;font-size:13px;letter-spacing:1px}
+button{font:inherit;cursor:pointer}.bag-btn,.dark-btn{border:0;background:var(--brown);color:white;padding:14px 20px;letter-spacing:1px}
+.hero{background:var(--sand);padding:85px 7%;text-align:center}.eyebrow{letter-spacing:5px;color:var(--gold);font-size:12px}
+h1,h2,h3{font-family:Georgia,serif;font-weight:400}h1{font-size:clamp(42px,8vw,76px);line-height:1.08;margin:24px auto;max-width:800px}h1 em,h2 em{color:var(--gold);font-style:normal}.hero p{color:var(--muted);font-size:18px;line-height:1.8;margin:25px auto 38px}
+section{padding:75px 6%;text-align:center}h2{font-size:clamp(32px,5vw,48px);margin:18px 0}.intro{color:var(--muted);font-size:17px}
+.filters{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:35px auto}.filter{padding:12px 18px;border:1px solid var(--gold);background:transparent;color:var(--brown)}.filter.active{background:var(--brown);color:white;border-color:var(--brown)}
+.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;max-width:1200px;margin:0 auto}
+.product{background:#f0e8dd;padding:14px;text-align:left}.product img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;background:#e5dbce}
+.product h3{font-size:20px;margin:15px 0 7px}.product .desc{font-size:13px;color:var(--muted);margin:0 0 12px}.price{font-weight:bold;margin:10px 0}
+.product select{width:100%;padding:10px;border:1px solid #cdbda9;background:#fff;color:var(--brown);margin:7px 0}
+.add{width:100%;padding:12px;background:var(--brown);color:#fff;border:0;margin-top:7px;letter-spacing:1px}
+.story{background:var(--sand)}.story p{max-width:680px;margin:22px auto;color:var(--muted);line-height:1.9;font-size:17px}
+footer{background:var(--brown);color:#f5eee5;text-align:center;padding:45px 20px}footer a{color:#f5eee5}
+.cart-panel{position:fixed;inset:0 0 0 auto;width:min(420px,100%);background:var(--cream);z-index:20;box-shadow:-10px 0 35px #0002;padding:24px;transform:translateX(110%);transition:.25s;overflow:auto;text-align:left}.cart-panel.open{transform:translateX(0)}
+.cart-head{display:flex;justify-content:space-between;align-items:center}.cart-line{padding:15px 0;border-bottom:1px solid #ddd;display:flex;justify-content:space-between;gap:12px}.cart-line small{display:block;color:var(--muted);margin-top:5px}.remove{border:0;background:none;color:#8a5d4a}.cart-total{font-size:19px;font-weight:bold;margin:24px 0}.notice{font-size:13px;color:var(--muted);line-height:1.6;background:#eee5d9;padding:14px}
+@media(max-width:760px){header{padding:15px 4%}.logo{font-size:17px;letter-spacing:3px}.logo span{font-size:10px;letter-spacing:5px}nav{gap:10px}nav a{font-size:11px}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product{padding:9px}.product h3{font-size:17px}.hero{padding:65px 6%}section{padding:60px 4%}}
+@media(max-width:390px){.products{grid-template-columns:1fr}nav a:nth-child(2){display:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">BOWELLE<span>MIRANDA</span></div>
+  <nav><a href="#shop">SHOP</a><a href="#story">OUR STORY</a><button class="bag-btn" onclick="toggleCart(true)">BAG (<span id="bagCount">0</span>)</button></nav>
+</header>
+<div class="hero">
+  <div class="eyebrow">BOWELLE MIRANDA</div>
+  <h1>Beauty lives in<br><em>the details.</em></h1>
+  <p>Thoughtfully handmade accessories<br>to make every moment special.</p>
+  <a class="dark-btn" href="#shop" style="display:inline-block;text-decoration:none">DISCOVER OUR COLLECTION</a>
+</div>
+<section id="shop">
+  <div class="eyebrow">BOWELLE MIRANDA</div><h2>Our <em>Collections</em></h2><p class="intro">Little details. Timeless beauty.</p>
+  <div class="filters" id="filters">
+    <button class="filter active" data-filter="All">All</button>
+    <button class="filter" data-filter="Scrunchies">Scrunchies</button>
+    <button class="filter" data-filter="Hair Bows">Hair Bows</button>
+    <button class="filter" data-filter="Hair Accessories">Hair Accessories</button>
+    <button class="filter" data-filter="Bags">Bags</button>
+  </div>
+  <div class="products" id="products"></div>
+</section>
+<section class="story" id="story">
+  <div class="eyebrow">OUR STORY</div><h2>Made with care.<br><em>Loved forever.</em></h2>
+  <p>Bowelle Miranda celebrates handmade accessories and the little details that make everyday moments feel special. Each piece is chosen and presented with care.</p>
+</section>
+<footer>
+  <div class="logo">BOWELLE<span>MIRANDA</span></div>
+  <p>Handmade with love.</p>
+  <p><a href="https://www.instagram.com/bowellemiranda_shop/" target="_blank" rel="noopener">Instagram @bowellemiranda_shop</a></p>
+  <p style="color:#c7b9aa;font-size:12px">Preview shop — orders and payments are not active yet.</p>
+</footer>
+
+<aside class="cart-panel" id="cartPanel" aria-label="Shopping bag">
+  <div class="cart-head"><h2>Your Bag</h2><button class="remove" onclick="toggleCart(false)" aria-label="Close bag">✕</button></div>
+  <div id="cartItems"></div><div class="cart-total" id="cartTotal">Total: €0.00</div>
+  <div class="notice">This is a preview shopping bag. Orders and payments are not active yet.</div>
+</aside>
+<script>
+const products = [
+ {id:1,name:"Champagne Satin Scrunchie",category:"Scrunchies",desc:"Champagne satin",sizes:[["Small",2],["Medium",3],["Large",5]]},
+ {id:2,name:"Autumn Charm Scrunchie",category:"Scrunchies",desc:"Floral pattern",sizes:[["Small",2],["Medium",3],["Large",5]]},
+ {id:3,name:"Ocean Bloom Scrunchie",category:"Scrunchies",desc:"Turquoise and emerald",sizes:[["Large",5]]},
+ {id:4,name:"Cobalt Dots Scrunchie",category:"Scrunchies",desc:"White with cobalt blue dots",sizes:[["Large",5]]},
+ {id:5,name:"Golden Satin Bow",category:"Hair Bows",desc:"Golden satin with rhinestone detail",sizes:[["One Size",10]]},
+ {id:6,name:"Blue Polka Dot Elegant",category:"Hair Accessories",desc:"Blue and white polka dot design",sizes:[["One Size",7]]},
+ {id:7,name:"Blue Lagoon Satin Scrunchie",category:"Scrunchies",desc:"Turquoise blue and lime green",sizes:[["One Size",5]]},
+ {id:8,name:"Polka Dot Scrunchie",category:"Scrunchies",desc:"White and cobalt blue",sizes:[["Small",2],["Medium",3],["Large",5]]},
+ {id:9,name:"Lime Green Crepe Scrunchie",category:"Scrunchies",desc:"Lime green crepe",sizes:[["Small",2],["Medium",3],["Large",5]]},
+ {id:10,name:"Sienna Woven Bag",category:"Bags",desc:"Caramel-toned woven bag",sizes:[["Medium",40]]},
+ {id:11,name:"Monochrome Ruffle Scrunchie",category:"Scrunchies",desc:"Black and white ruffle design",sizes:[["One Size",5]]},
+ {id:12,name:"Blue Porcelain Scrunchie",category:"Scrunchies",desc:"Blue and white porcelain pattern",sizes:[["One Size",5]]},
+ {id:13,name:"Wild Elegance Scrunchie",category:"Scrunchies",desc:"Leopard print",sizes:[["One Size",5]]},
+ {id:14,name:"Ruby Elegant",category:"Hair Accessories",desc:"Ruby red satin with long tails",sizes:[["One Size",7]]},
+ {id:15,name:"Aegean Breeze 01",category:"Scrunchies",desc:"Blue and cream Mediterranean print",sizes:[["Small",2],["Medium",3],["Large",5]]},
+ {id:16,name:"Aegean Breeze 02",category:"Scrunchies",desc:"Mediterranean print with turquoise trim",sizes:[["One Size",5]]},
+ {id:17,name:"Royal Blue Essence Scrunchie",category:"Scrunchies",desc:"Royal blue",sizes:[["Small",2],["Medium",3],["Large",5]]},
+ {id:18,name:"Lavender Dream Scrunchie",category:"Scrunchies",desc:"Lavender purple",sizes:[["Small",2],["Medium",3],["Large",5]]},
+ {id:19,name:"Golden Glow Satin Scrunchie",category:"Scrunchies",desc:"Gold satin",sizes:[["Small",2],["Medium",3],["Large",5]]},
+ {id:20,name:"Aqua Dream Lace Scrunchie",category:"Scrunchies",desc:"White lace with turquoise trim",sizes:[["One Size",5]]},
+ {id:21,name:"Blue Lace Elegance Scrunchie",category:"Hair Accessories",desc:"Blue and white floral with long ribbons",sizes:[["One Size",7]]},
+ {id:22,name:"Emerald Satin Scrunchie",category:"Scrunchies",desc:"Emerald green satin",sizes:[["Small",2],["Medium",3],["Large",5]]},
+ {id:23,name:"Golden Butterfly Bow",category:"Hair Bows",desc:"Brown and gold",sizes:[["One Size",5]]},
+ {id:24,name:"Blush & Grey Butterfly Bow",category:"Hair Bows",desc:"Soft blush and grey",sizes:[["One Size",5]]},
+ {id:25,name:"Golden Elegance Satin Bow",category:"Hair Bows",desc:"Gold satin bow",sizes:[["One Size",10]]},
+ {id:26,name:"Wild Rose Satin Scrunchie",category:"Hair Accessories",desc:"Rose leopard print with decorative bow and ribbons",sizes:[["One Size",7]]},
+ {id:27,name:"Soft Blush Bow",category:"Hair Bows",desc:"Soft blush bow",sizes:[["One Size",10]]},
+ {id:28,name:"Golden Elegance Bow",category:"Hair Bows",desc:"Golden bow design",sizes:[["One Size",10]]},
+ {id:29,name:"Aqua Dream Bow",category:"Hair Bows",desc:"Aqua-toned bow",sizes:[["One Size",10]]},
+ {id:30,name:"Pure Elegance Lace Bow",category:"Hair Bows",desc:"White lace with pearl details",sizes:[["One Size",15]]},
+ {id:31,name:"Baby Blue Satin Scrunchie",category:"Scrunchies",desc:"Baby blue satin",sizes:[["Small",2],["Medium",3],["Large",5]]},
+ {id:32,name:"Baby Blue Lace Scrunchie",category:"Scrunchies",desc:"Baby blue lace",sizes:[["One Size",6]]}
+];
+let activeFilter="All", cart=[];
+const money=n=>"€"+n.toFixed(2);
+function renderProducts(){
+ const list=products.filter(p=>activeFilter==="All"||p.category===activeFilter);
+ document.getElementById("products").innerHTML=list.map(p=>`
+ <article class="product">
+  <img src="product-${String(p.id).padStart(2,"0")}.webp" alt="${p.name}" loading="lazy" onerror="this.style.display='none'">
+  <h3>${p.name}</h3><p class="desc">${p.desc}</p>
+  ${p.sizes.length>1?`<select id="size-${p.id}" aria-label="Choose size for ${p.name}">${p.sizes.map((s,i)=>`<option value="${i}">${s[0]} — ${money(s[1])}</option>`).join("")}</select>`:`<p class="price">${money(p.sizes[0][1])} · ${p.sizes[0][0]}</p>`}
+  <button class="add" onclick="addToCart(${p.id})">ADD TO BAG</button>
+ </article>`).join("");
+}
+function addToCart(id){
+ const p=products.find(x=>x.id===id),idx=p.sizes.length>1?Number(document.getElementById("size-"+id).value):0,s=p.sizes[idx];
+ cart.push({id,name:p.name,size:s[0],price:s[1]});renderCart();
+}
+function renderCart(){
+ document.getElementById("bagCount").textContent=cart.length;
+ document.getElementById("cartItems").innerHTML=cart.length?cart.map((x,i)=>`<div class="cart-line"><div>${x.name}<small>${x.size} · ${money(x.price)}</small></div><button class="remove" onclick="removeItem(${i})">Remove</button></div>`).join(""):"<p>Your bag is empty.</p>";
+ document.getElementById("cartTotal").textContent="Total: "+money(cart.reduce((a,x)=>a+x.price,0));
+}
+function removeItem(i){cart.splice(i,1);renderCart()}
+function toggleCart(open){document.getElementById("cartPanel").classList.toggle("open",open)}
+document.getElementById("filters").addEventListener("click",e=>{
+ const b=e.target.closest("button[data-filter]");if(!b)return;
+ activeFilter=b.dataset.filter;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));renderProducts();
+});
+renderProducts();renderCart();
+</script>
+</body>
+</html>
